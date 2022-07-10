@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
             ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
         mMainActivityViewModel.nextRaceInfo.observe(this) {
-            println("nextRacce:$it")
             raceModel = it
             mBinding.nextRaceTextView.text = it.nextRaceName
             mBinding.nextRaceLocationTextView.text = "${it.nextRaceCity},${it.nextRaceCountry}"
@@ -52,7 +51,8 @@ class MainActivity : AppCompatActivity() {
 
             currentTime = Calendar.getInstance().time
             val mFragmentManager = supportFragmentManager
-            mFragmentStateManager = FragmentStateManager(mFragmentManager)
+            mFragmentStateManager = FragmentStateManager()
+            mFragmentStateManager.setFragmentManager(mFragmentManager)
             startCountDownTimer()
 
 
@@ -67,24 +67,24 @@ class MainActivity : AppCompatActivity() {
             BottomNavigationView.OnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
                     R.id.race -> {
-                        FragmentStateManager.goRacePage()
+                        mFragmentStateManager.goRacePage()
                         true
                     }
                     R.id.home -> {
                         if (currentTime.time > qualifity.time) {
-                            FragmentStateManager.goQualiftyPage(raceModel.nextRaceYear,raceModel.nextRaceRound)
+                            mFragmentStateManager.goQualiftyPage(raceModel.nextRaceYear,raceModel.nextRaceRound)
                         }
                         else {
-                            FragmentStateManager.goHomePage(raceModel.nextRaceYear,(raceModel.nextRaceRound.toInt() - 1).toString())
+                            mFragmentStateManager.goHomePage(raceModel.nextRaceYear,(raceModel.nextRaceRound.toInt() - 1).toString())
                         }
                         true
                     }
                     R.id.driver -> {
-                        FragmentStateManager.goDrivePage()
+                        mFragmentStateManager.goDrivePage()
                         true
                     }
                     R.id.constructor -> {
-                        FragmentStateManager.goConstPage()
+                        mFragmentStateManager.goConstPage()
                         true
                     }
                     else -> false

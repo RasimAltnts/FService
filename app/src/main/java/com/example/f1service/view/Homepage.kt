@@ -19,6 +19,7 @@ class Homepage : Fragment() {
     private lateinit var mBinding:HomepageFragmentBinding
     private lateinit var session:String
     private lateinit var round:String
+    private lateinit var mFragmentStateManager: FragmentStateManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,9 +42,10 @@ class Homepage : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomepageViewModel::class.java)
+        mFragmentStateManager = FragmentStateManager()
         viewModel.lastRaceInfo.observe(requireActivity()) {
             if (it.pilot == null) {
-                FragmentStateManager.goQualiftyPage(session,round)
+                mFragmentStateManager.goQualiftyPage(session,round)
             }
             else {
                 mBinding.lastRaceTextView.text = it.circuitName
