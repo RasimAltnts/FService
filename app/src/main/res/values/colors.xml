@@ -9,5 +9,10 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Color Palette-->
-    <color name="background">#000000</color>
+    <color name="background">#CC272525</color>
+    <color name="white_400">#CCFCFFE7</color>
+    <color name="text_color">#CC000000</color>
+    <color name="f1_red">#FF1801</color>
+    <color name="transparent">#00FFFF00</color>
+    <color name="countDownLayoutTextColor">#3E6B63</color>
 </resources>

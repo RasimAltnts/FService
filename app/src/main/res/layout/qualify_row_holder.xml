@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="200px"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="40px"
+        android:layout_marginLeft="40px"
+        android:layout_marginRight="40px"
+        android:layout_marginTop="10px"
+        android:layout_marginBottom="10px">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/teamImageView"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:layout_marginLeft="160px"
+            android:layout_marginTop="50px"/>
+
+        <TextView
+            style="@style/positionStyle"
+            android:id="@+id/position"
+            android:layout_marginTop="40px"
+            android:layout_marginLeft="40px"
+            android:layout_width="100px"
+            android:layout_height="100px"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/column1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="300px"
+                android:layout_marginTop="60px"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/driverName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50px"
+                    android:fontFamily="@font/kumbhsans_light"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="40px"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/column2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="700px"
+            android:layout_marginTop="20px"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/qualiResultStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Q1 : "
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/q1TextView"
+                style="@style/qualiResultStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:text="--"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/qualiResultStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:text="Q2 : "
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/q2TextView"
+                style="@style/qualiResultStyle"
+                android:text="--"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/q1TextView"
+                app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/qualiResultStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:text="Q3 : "
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView3" />
+
+            <TextView
+                android:id="@+id/q3TextView"
+                style="@style/qualiResultStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                app:layout_constraintBottom_toBottomOf="@+id/textView4"
+                app:layout_constraintStart_toStartOf="@+id/q2TextView"
+                app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_marginTop="10px"
+            android:layout_marginLeft="270px"
+            android:layout_width="2px"
+            android:layout_height="60px"
+            android:background="@color/black"/>
+
+        <View
+            android:layout_marginTop="110px"
+            android:layout_marginLeft="270px"
+            android:layout_width="2px"
+            android:layout_height="60px"
+            android:background="@color/black"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

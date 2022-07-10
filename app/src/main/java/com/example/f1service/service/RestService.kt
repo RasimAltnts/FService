@@ -23,8 +23,13 @@ class RestService {
 
     interface IRequestCallback {
         fun isSuccesfull(response:JsonObject?)
-        fun isFailed(ErrorCode:Int)
-        fun isError()
+
+        fun isFailed(ErrorCode:Int){
+            println("ErrorCode:$ErrorCode")
+        }
+        fun isError(){
+            println("Request is Error")
+        }
     }
 
     private val BASE_URL = "http://ergast.com/api/f1/"

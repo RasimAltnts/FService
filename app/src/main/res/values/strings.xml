@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">F1Service</string>
+    <string name="app_name">FService</string>
     <string name="bottomNavSession">Session</string>
     <string name="bottomNavDrivers">Drivers</string>
     <string name="bottomNavRace">Race</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>

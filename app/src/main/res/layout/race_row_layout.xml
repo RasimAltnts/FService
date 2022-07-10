@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:layout_marginBottom="40px"
+        android:backgroundTint="@color/white"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="15px"
+        android:layout_marginLeft="40px"
+        android:layout_marginRight="40px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/finishFlag"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:layout_marginLeft="60px"
+            android:layout_marginTop="20px"
+            android:scaleType="centerCrop"
+            android:src="@drawable/race_flag"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/CircuitTextView"
+            android:layout_width="500px"
+            android:layout_height="80px"
+            android:layout_marginLeft="200px"
+            android:layout_marginTop="20px"
+            android:singleLine="true"
+            android:fontFamily="@font/inter_light"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="40px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="55px"
+            android:layout_marginTop="120px"
+            android:layout_marginLeft="80px"
+            android:text="Date:"
+            android:textColor="@color/black"
+            android:textSize="35px" />
+
+        <TextView
+            android:id="@+id/dateTextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_marginTop="120px"
+            android:layout_marginLeft="200px"
+            android:textColor="@color/black"
+            android:textSize="35px"/>
+
+
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

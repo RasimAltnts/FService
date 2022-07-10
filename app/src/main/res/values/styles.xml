@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">10sp</item>
+        <item name="textFillColor">@color/black</item>
+    </style>
+    <style name="countDownTimerStyle">
+        <item name="fontFamily">@font/kumbhsans_regular</item>
+        <item name="android:textColor">@color/countDownLayoutTextColor</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+    <style name="positionStyle">
+        <item name="fontFamily">@font/inter_medium</item>
+        <item name="android:textSize">50px</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="qualiResultStyle">
+        <item name="fontFamily">@font/kumbhsans_light</item>
+        <item name="android:textSize">32px</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+</resources>
