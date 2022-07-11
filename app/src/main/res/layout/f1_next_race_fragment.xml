@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    tools:context=".view.F1NextRace">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/nextRaceLay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="20px"
+        app:cardBackgroundColor="@color/f1_red"
+        app:cardCornerRadius="40px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/nextRaceLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/next_race_bg">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:fontFamily="@font/kumbhsans_regular"
+                android:text="F SERVICE"
+                android:textColor="@color/black"
+                android:textSize="48px"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="20px"
+                android:src="@drawable/f1_car"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/circuitImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="250px"
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="50px"
+            android:layout_marginTop="125px"
+            android:background="@drawable/last_race_count_down_bg">
+
+            <TextView
+                android:id="@+id/nextRaceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kumbhsans_regular"
+                android:textColor="@color/white"
+                android:layout_marginTop="50px"
+                android:textSize="40px"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nextRaceDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:fontFamily="@font/kumbhsans_light"
+                android:textColor="@color/white"
+                android:textSize="28px"
+                app:layout_constraintStart_toStartOf="@+id/nextRaceTextView"
+                app:layout_constraintTop_toBottomOf="@+id/nextRaceTextView" />
+
+            <TextView
+                android:id="@+id/nextRaceLocationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:fontFamily="@font/kumbhsans_light"
+                android:textColor="@color/white"
+                android:textSize="28px"
+                app:layout_constraintStart_toStartOf="@+id/nextRaceDateTextView"
+                app:layout_constraintTop_toBottomOf="@+id/nextRaceDateTextView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CountDownLayout"
+            android:layout_width="500px"
+            android:layout_marginTop="150px"
+            android:layout_height="190px"
+            android:layout_marginLeft="90px">
+
+            <com.example.f1service.customComponents.CalendarComponents
+                android:id="@+id/CalendarComponetsDays"
+                android:layout_width="120px"
+                android:layout_height="160px"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/calendarComponentsHours"
+                app:layout_constraintTop_toTopOf="parent"
+                app:text="Days" />
+
+
+            <com.example.f1service.customComponents.CalendarComponents
+                android:id="@+id/calendarComponentsHours"
+                android:layout_width="120px"
+                android:layout_height="160px"
+                app:layout_constraintBottom_toBottomOf="@+id/calendarComponentsMinutes"
+                app:layout_constraintEnd_toStartOf="@+id/calendarComponentsMinutes"
+                app:layout_constraintTop_toTopOf="@+id/calendarComponentsMinutes"
+                app:text="Hours" />
+
+            <com.example.f1service.customComponents.CalendarComponents
+                android:id="@+id/calendarComponentsMinutes"
+                android:layout_width="120px"
+                android:layout_height="160px"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/CalendarComponentSeconds"
+                app:layout_constraintTop_toTopOf="parent"
+                app:text="Minutes" />
+
+
+            <com.example.f1service.customComponents.CalendarComponents
+                android:id="@+id/CalendarComponentSeconds"
+                android:layout_width="120px"
+                android:layout_height="160px"
+                android:layout_marginRight="10px"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:text="Seconds" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

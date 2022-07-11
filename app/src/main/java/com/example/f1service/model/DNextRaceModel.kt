@@ -1,9 +1,8 @@
 package com.example.f1service.model
 
-import com.example.f1service.model.nextRace.FirstPractice
-import com.example.f1service.model.nextRace.Qualifying
-import com.example.f1service.model.nextRace.SecondPractice
-import com.example.f1service.model.nextRace.ThirdPractice
+import com.example.f1service.model.F1NextRace.FirstPractice
+import com.example.f1service.model.F1NextRace.Qualifying
+import com.example.f1service.model.F1NextRace.SecondPractice
 
 data class DNextRaceModel(
     val nextRaceName:String,
@@ -17,4 +16,6 @@ data class DNextRaceModel(
     val qualifying: Qualifying,
     val nextRaceRound:String,
     val nextRaceYear:String,
+    val sprintTime:String?,
+    val sprintDate:String?,
 )

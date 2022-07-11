@@ -1,15 +1,15 @@
-package com.example.f1service.model.nextRace
+package com.example.f1service.model.F1SprintModel
 
 
 import com.google.gson.annotations.SerializedName
 
 data class Circuit(
     @SerializedName("circuitId")
-    val circuitId: String,
+    var circuitId: String,
     @SerializedName("circuitName")
-    val circuitName: String,
+    var circuitName: String,
     @SerializedName("Location")
-    val location: Location,
+    var location: Location,
     @SerializedName("url")
-    val url: String
+    var url: String
 )

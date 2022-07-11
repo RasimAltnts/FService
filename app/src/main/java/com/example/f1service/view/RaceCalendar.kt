@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.f1service.R
 import com.example.f1service.adapter.RaceListAdapter
 import com.example.f1service.databinding.RaceCalendarFragmentBinding
 import com.example.f1service.extension.time
@@ -57,7 +56,7 @@ class RaceCalendar : Fragment(),RaceListAdapter.IRaceList {
     override fun onItemClick(round: String, session: String, date: String, time: String) {
         val timezone = ZonedDateTime.now().time(date,time)
         if (currentTime.time > timezone.time){
-            mFragmentStateManager.goHomePage(session,round)
+            mFragmentStateManager.goRacePage(session,round)
         }
     }
 }

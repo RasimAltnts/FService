@@ -1,11 +1,11 @@
-package com.example.f1service.model.nextRace
+package com.example.f1service.model.F1NextRace
 
 
 import com.google.gson.annotations.SerializedName
 
 data class Qualifying(
     @SerializedName("date")
-    val date: String,
+    var date: String,
     @SerializedName("time")
-    val time: String
+    var time: String
 )

@@ -1,13 +1,13 @@
-package com.example.f1service.model.nextRace
+package com.example.f1service.model.F1SprintModel
 
 
 import com.google.gson.annotations.SerializedName
 
 data class RaceTable(
     @SerializedName("Races")
-    val races: List<Race>,
+    var races: List<Race>,
     @SerializedName("round")
-    val round: String,
+    var round: String,
     @SerializedName("season")
-    val season: String
+    var season: String
 )

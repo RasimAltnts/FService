@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.f1service.logic.HomePageLogic
 import com.example.f1service.model.DLastRace
+import com.example.f1service.service.IRequestCallback
 import com.example.f1service.service.RestService
 import com.google.gson.JsonObject
 
@@ -17,9 +18,8 @@ class HomepageViewModel : ViewModel() {
     private var mHomepageLogic = HomePageLogic()
 
 
-    private var lastRaceResultCallback: RestService.IRequestCallback = object : RestService.IRequestCallback{
+    private var lastRaceResultCallback: IRequestCallback = object : IRequestCallback{
         override fun isSuccesfull(response: JsonObject?) {
-            println("res:$response")
             response?.let {
                 lastRaceInfo.value = mHomepageLogic.decodeLastRaceResponse(response)
             }

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.f1service.logic.DriverListLogic
 import com.example.f1service.model.DF1DriversModels
+import com.example.f1service.service.IRequestCallback
 import com.example.f1service.service.RestService
 import com.google.gson.JsonObject
 
@@ -15,7 +16,7 @@ class F1DriversViewModel : ViewModel() {
     private val mRestService = RestService()
     private val mF1DriverListLogic = DriverListLogic()
 
-    private val driverListResponse = object : RestService.IRequestCallback {
+    private val driverListResponse = object : IRequestCallback {
         override fun isSuccesfull(response: JsonObject?) {
             response?.let {
                 driverList.value = mF1DriverListLogic.decodeResponse(response)

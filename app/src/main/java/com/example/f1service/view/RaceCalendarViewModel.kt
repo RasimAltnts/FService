@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.f1service.adapter.RaceListAdapter
 import com.example.f1service.logic.CalendarListLogic
 import com.example.f1service.model.DF1CurrentSession
+import com.example.f1service.service.IRequestCallback
 import com.example.f1service.service.RestService
 import com.google.gson.JsonObject
 
@@ -18,7 +19,7 @@ class RaceCalendarViewModel : ViewModel() {
 
     private var mRestService = RestService()
 
-    private var raceCallback = object : RestService.IRequestCallback{
+    private var raceCallback = object : IRequestCallback {
         override fun isSuccesfull(response: JsonObject?) {
 
             val mCalendarListLogic = CalendarListLogic()

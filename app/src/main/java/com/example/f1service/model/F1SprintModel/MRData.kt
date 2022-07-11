@@ -1,21 +1,21 @@
-package com.example.f1service.model.nextRace
+package com.example.f1service.model.F1SprintModel
 
 
 import com.google.gson.annotations.SerializedName
 
 data class MRData(
     @SerializedName("limit")
-    val limit: String,
+    var limit: String,
     @SerializedName("offset")
-    val offset: String,
+    var offset: String,
     @SerializedName("RaceTable")
-    val raceTable: RaceTable,
+    var raceTable: RaceTable,
     @SerializedName("series")
-    val series: String,
+    var series: String,
     @SerializedName("total")
-    val total: String,
+    var total: String,
     @SerializedName("url")
-    val url: String,
+    var url: String,
     @SerializedName("xmlns")
-    val xmlns: String
+    var xmlns: String
 )

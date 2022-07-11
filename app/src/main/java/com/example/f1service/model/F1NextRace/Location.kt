@@ -1,15 +1,15 @@
-package com.example.f1service.model.nextRace
+package com.example.f1service.model.F1NextRace
 
 
 import com.google.gson.annotations.SerializedName
 
 data class Location(
     @SerializedName("country")
-    val country: String,
+    var country: String,
     @SerializedName("lat")
-    val lat: String,
+    var lat: String,
     @SerializedName("locality")
-    val locality: String,
+    var locality: String,
     @SerializedName("long")
-    val long: String
+    var long: String
 )

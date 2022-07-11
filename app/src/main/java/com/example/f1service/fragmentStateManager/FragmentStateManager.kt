@@ -13,7 +13,7 @@ class FragmentStateManager() {
 
     }
 
-    fun goRacePage() {
+    fun goRaceCalendar() {
         try{
             val fragmentTransaction = fragmentManager?.beginTransaction()
             fragmentTransaction?.replace(R.id.homeLayout, RaceCalendar())
@@ -23,7 +23,7 @@ class FragmentStateManager() {
         }
     }
 
-    fun goHomePage(session: String,round:String) {
+    fun goRacePage(session: String, round:String) {
         try {
             val fragmentTransaction = fragmentManager?.beginTransaction()
             val bundle = Bundle()
@@ -63,7 +63,7 @@ class FragmentStateManager() {
 
     fun goQualiftyPage(session:String,round:String) {
         try {
-            var fragmentTransaction = fragmentManager?.beginTransaction()
+            val fragmentTransaction = fragmentManager?.beginTransaction()
             val bundle = Bundle()
             bundle.putString("session",session)
             bundle.putString("round",round)
@@ -74,6 +74,26 @@ class FragmentStateManager() {
         }catch (e:Exception) {
             Log.d("I/FService","Fragment Transaction error because ${e.cause}")
 
+        }
+    }
+
+    fun goNextRace() {
+        try {
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.nextRaceLay,F1NextRace())
+            fragmentTransaction?.commit()
+        }catch (e:Exception){
+            Log.d("I/FService","Fragment Transaction error because ${e.cause}")
+        }
+    }
+
+    fun goSprintPage() {
+        try {
+            val fragmentTransaction = fragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.homeLayout,F1Sprint())
+            fragmentTransaction?.commit()
+        }catch (e:Exception) {
+            Log.d("I/FService","Fragment Transaction error because ${e.cause}")
         }
     }
 
