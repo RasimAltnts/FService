@@ -10,11 +10,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.f1service.adapter.ConsAdapter
 import com.example.f1service.databinding.F1ConstructorStandingFragmentBinding
+import com.example.f1service.service.IRequestCallback
+import com.example.f1service.service.RestService
+import com.google.gson.JsonObject
 
 class F1ConstructorStanding : Fragment() {
 
     private lateinit var viewModel: F1ConstructorStandingViewModel
     private lateinit var mBinding:F1ConstructorStandingFragmentBinding
+    private val mRestService = RestService()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,8 +47,20 @@ class F1ConstructorStanding : Fragment() {
 
         }
 
-        viewModel.getDriverList()
+        getDriverList()
 
+    }
 
+    val constCallback = object : IRequestCallback {
+        override fun isSuccesfull(response: JsonObject?) {
+            response?.let {
+               viewModel.decodeResponse(response)
+            }
+        }
+
+    }
+
+    fun getDriverList() {
+        mRestService.sendRequest("current/constructorStandings.json",constCallback)
     }
 }

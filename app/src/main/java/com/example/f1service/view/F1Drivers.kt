@@ -8,15 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.f1service.R
 import com.example.f1service.adapter.DriverListAdapter
-import com.example.f1service.adapter.LastRaceAdapter
 import com.example.f1service.databinding.F1DriversFragmentBinding
+import com.example.f1service.service.IRequestCallback
+import com.example.f1service.service.RestService
+import com.google.gson.JsonObject
 
 class F1Drivers : Fragment() {
 
     private lateinit var viewModel: F1DriversViewModel
     private lateinit var mBinding: F1DriversFragmentBinding
+    private val mRestService = RestService()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +35,7 @@ class F1Drivers : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(F1DriversViewModel::class.java)
-        viewModel.getDriverList()
+        getDriverList()
 
         viewModel.driverList.observe(viewLifecycleOwner) {
 
@@ -43,6 +46,18 @@ class F1Drivers : Fragment() {
             adapter = DriverListAdapter(it,requireContext())
             mBinding.driverRecycleView.adapter = adapter
         }
+    }
+
+    private val driverListResponse = object : IRequestCallback {
+        override fun isSuccesfull(response: JsonObject?) {
+            response?.let {
+                viewModel.decodeResponse(response)
+            }
+        }
+    }
+
+    fun getDriverList() {
+        mRestService.sendRequest("2022/driverStandings.json",driverListResponse)
     }
 
 }

@@ -23,7 +23,7 @@ class FragmentStateManager() {
         }
     }
 
-    fun goRacePage(session: String, round:String) {
+    fun goRacePage(session: String?, round:String?) {
         try {
             val fragmentTransaction = fragmentManager?.beginTransaction()
             val bundle = Bundle()
@@ -61,7 +61,7 @@ class FragmentStateManager() {
 
     }
 
-    fun goQualiftyPage(session:String,round:String) {
+    fun goQualiftyPage(session:String?,round:String?) {
         try {
             val fragmentTransaction = fragmentManager?.beginTransaction()
             val bundle = Bundle()

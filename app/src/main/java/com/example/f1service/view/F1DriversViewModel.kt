@@ -2,10 +2,9 @@ package com.example.f1service.view
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.f1service.logic.DriverListLogic
 import com.example.f1service.model.DF1DriversModels
-import com.example.f1service.service.IRequestCallback
-import com.example.f1service.service.RestService
+import com.example.f1service.model.F1Driver.F1DriverStanding
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 
 class F1DriversViewModel : ViewModel() {
@@ -13,18 +12,24 @@ class F1DriversViewModel : ViewModel() {
         MutableLiveData<ArrayList<DF1DriversModels>> ()
     }
 
-    private val mRestService = RestService()
-    private val mF1DriverListLogic = DriverListLogic()
+    private var gson = Gson()
 
-    private val driverListResponse = object : IRequestCallback {
-        override fun isSuccesfull(response: JsonObject?) {
-            response?.let {
-                driverList.value = mF1DriverListLogic.decodeResponse(response)
-            }
+    fun decodeResponse(jsonObject: JsonObject){
+        val mF1DriverModels = gson.fromJson(jsonObject, F1DriverStanding::class.java)
+        val result:ArrayList<DF1DriversModels> = ArrayList()
+        var i = 0
+
+        while (i < mF1DriverModels.mRData.standingsTable.standingsLists[0].driverStandings.size) {
+            val res:DF1DriversModels = DF1DriversModels(
+                pilotName = mF1DriverModels.mRData.standingsTable.standingsLists[0].driverStandings[i].driver.givenName,
+                pilotSurname = mF1DriverModels.mRData.standingsTable.standingsLists[0].driverStandings[i].driver.familyName,
+                constructorId = mF1DriverModels.mRData.standingsTable.standingsLists[0].driverStandings[i].constructors[0].constructorId,
+                points = mF1DriverModels.mRData.standingsTable.standingsLists[0].driverStandings[i].points,
+                position = mF1DriverModels.mRData.standingsTable.standingsLists[0].driverStandings[i].position
+            )
+            result.add(res)
+            i++
         }
-    }
-
-    fun getDriverList() {
-        mRestService.sendRequest("2022/driverStandings.json",driverListResponse)
+        driverList.value = result
     }
 }

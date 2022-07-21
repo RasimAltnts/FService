@@ -63,11 +63,7 @@ class F1Sprint : Fragment() {
 
     private fun sendRequest(){
         mRestService.sendRequest(
-            "${Const.session}/${Const.round}/sprint.json",
+            "${Const.nextTime.value?.session}/${Const.nextTime.value?.round}/sprint.json",
             callback)
-
-        Const.sprintTime?.let {
-
-        }
     }
 }

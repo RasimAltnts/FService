@@ -1,14 +1,15 @@
 package com.example.f1service.extension
 
+import androidx.lifecycle.MutableLiveData
+import com.example.f1service.model.DNextWeekend
 import java.util.*
 
 class Const {
     companion object{
-        var raceTime:Date? = null
-        var qualifityTime:Date? = null
-        var sprintTime:Date ?= null
-        var currentTime:Date ?= null
-        var session:String = "2022"
-        var round:String = "11"
+        var currentTime:Date? =  null
+        val nextTime: MutableLiveData<DNextWeekend> by lazy {
+            MutableLiveData<DNextWeekend>()
+        }
+        //var nextTime:DNextWeekend = DNextWeekend()
     }
 }

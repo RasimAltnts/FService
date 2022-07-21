@@ -11,7 +11,9 @@ import com.example.f1service.databinding.F1NextRaceFragmentBinding
 import com.example.f1service.extension.Const
 import com.example.f1service.extension.time
 import com.example.f1service.extension.toString
+import com.example.f1service.fragmentStateManager.FragmentStateManager
 import com.example.f1service.model.DNextRaceModel
+import com.example.f1service.model.DNextWeekend
 import com.example.f1service.service.DaggerIF1NextRace
 import com.example.f1service.service.IRequestCallback
 import com.example.f1service.service.RestService
@@ -26,8 +28,7 @@ class F1NextRace : Fragment() {
 
     private lateinit var viewModel: F1NextRaceViewModel
     private lateinit var mBinding:  F1NextRaceFragmentBinding
-    private lateinit var qualifity:Date
-    private lateinit var currentTime:Date
+    private lateinit var mFragmentStateManager: FragmentStateManager
 
     @Inject
     lateinit var restService: RestService
@@ -44,26 +45,35 @@ class F1NextRace : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this)[F1NextRaceViewModel::class.java]
+        mFragmentStateManager = FragmentStateManager()
 
         viewModel.nextRaceInfo.observe(viewLifecycleOwner) {
             mBinding.nextRaceTextView.text = it.nextRaceName
             mBinding.nextRaceLocationTextView.text = "${it.nextRaceCity},${it.nextRaceCountry}"
 
             //Inıtilaze Next Race Date
-            Const.raceTime = ZonedDateTime.now().time(it.nextRaceDate,it.nextRaceTime)
-            Const.qualifityTime = ZonedDateTime.now().time(it.qualifying.date,it.qualifying.time)
-            Const.raceTime?.let {
-                mBinding.nextRaceDateTextView.text = ZonedDateTime.now().toString(timezone = it)
-            }
-            Const.session = it.nextRaceYear
-            Const.round = it.nextRaceRound
-
-            if (it.sprintDate != null && it.sprintTime != null) {
-                Const.sprintTime = ZonedDateTime.now().time(it.sprintDate,it.sprintTime)
-            }
-            countDownTimerInit()
 
             Const.currentTime = Calendar.getInstance().time
+
+            it?.let {
+                val nextWeekModel = DNextWeekend()
+                nextWeekModel.raceTime = ZonedDateTime.now().time(it.nextRaceDate,it.nextRaceTime)
+                nextWeekModel.qualitime = ZonedDateTime.now().time(it.qualifying.date,it.qualifying.time)
+                nextWeekModel.session = it.nextRaceYear
+                nextWeekModel.round = it.nextRaceRound
+                if (it.sprintDate != null && it.sprintTime != null) {
+                    nextWeekModel.sprintTime = ZonedDateTime.now().time(it.sprintDate,it.sprintTime)
+                }
+
+                Const.nextTime.value = nextWeekModel
+            }
+
+            Const.nextTime.value?.let {
+                mBinding.nextRaceDateTextView.text = it.raceTime?.let { it1 -> ZonedDateTime.now().toString(timezone = it1) }
+            }
+
+            countDownTimerInit()
+
             startCountDownTimer()
 
         }
@@ -84,7 +94,7 @@ class F1NextRace : Fragment() {
         }
     }
 
-    fun isNextRace(){
+    private fun isNextRace(){
         restService.sendRequest("current/next.json",nextRaceCallback)
     }
 
@@ -110,7 +120,7 @@ class F1NextRace : Fragment() {
     }
 
     private fun countDownTimerMinutes() {
-        Const.raceTime?.let {
+        Const.nextTime.value?.raceTime?.let {
             val currentMinutes = Calendar.getInstance().time.minutes
             val dateMinutes = it.minutes
             val countTimeMinutes = 60 - (currentMinutes - dateMinutes)
@@ -122,7 +132,7 @@ class F1NextRace : Fragment() {
     }
 
     private fun countDownTimerHours() {
-        Const.raceTime?.let {
+        Const.nextTime.value?.raceTime?.let {
             val currentHours = Calendar.getInstance().time.hours
             val dateHours = it.hours
 
@@ -138,7 +148,7 @@ class F1NextRace : Fragment() {
     }
 
     private fun countDownDays() {
-        Const.raceTime?.let {
+        Const.nextTime.value?.raceTime?.let {
             val cal = Calendar.getInstance()
             val dayOfMonth: Int = cal.get(Calendar.DAY_OF_MONTH)
             val currentMonth = Calendar.getInstance().time.month

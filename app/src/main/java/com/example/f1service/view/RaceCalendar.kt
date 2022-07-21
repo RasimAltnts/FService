@@ -12,6 +12,9 @@ import com.example.f1service.adapter.RaceListAdapter
 import com.example.f1service.databinding.RaceCalendarFragmentBinding
 import com.example.f1service.extension.time
 import com.example.f1service.fragmentStateManager.FragmentStateManager
+import com.example.f1service.service.IRequestCallback
+import com.example.f1service.service.RestService
+import com.google.gson.JsonObject
 import java.time.ZonedDateTime
 import java.util.*
 
@@ -40,7 +43,7 @@ class RaceCalendar : Fragment(),RaceListAdapter.IRaceList {
         viewModel = ViewModelProvider(this).get(RaceCalendarViewModel::class.java)
         mFragmentStateManager = FragmentStateManager()
 
-        viewModel.sendRequest()
+        sendRequest()
 
         viewModel.calendar.observe(viewLifecycleOwner) {
 
@@ -58,5 +61,17 @@ class RaceCalendar : Fragment(),RaceListAdapter.IRaceList {
         if (currentTime.time > timezone.time){
             mFragmentStateManager.goRacePage(session,round)
         }
+    }
+
+    private var mRestService = RestService()
+
+    private var raceCallback = object : IRequestCallback {
+        override fun isSuccesfull(response: JsonObject?) {
+            response?.let {viewModel.decodeResponse(jsonObject = it) }
+        }
+    }
+
+    fun sendRequest() {
+        mRestService.sendRequest("current.json",raceCallback)
     }
 }

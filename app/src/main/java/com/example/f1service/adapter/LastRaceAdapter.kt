@@ -8,6 +8,8 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.f1service.F1.F1Cars
+import com.example.f1service.F1.F1Driver
 import com.example.f1service.F1.F1DriverNumber
 import com.example.f1service.F1.F1Team
 import com.example.f1service.R
@@ -18,8 +20,9 @@ class LastRaceAdapter(val raceResults:ArrayList<DLastRaceResult>,var context: Co
 
     class RowHolder(val mBinding:LastRaceRowHolderBinding):RecyclerView.ViewHolder(mBinding.root) {
 
-        val mF1Team = F1Team()
-        val mF1Driver = F1DriverNumber()
+        private val mF1Team = F1Team()
+        private val mF1Driver = F1Driver()
+        private val mF1Car = F1Cars()
 
         @SuppressLint("SetTextI18n")
         fun bind(result:ArrayList<DLastRaceResult>, position: Int,context:Context) {
@@ -35,39 +38,78 @@ class LastRaceAdapter(val raceResults:ArrayList<DLastRaceResult>,var context: Co
 
 
             when(result[position].constructorId) {
-                "red_bull" -> Glide.with(context).load(mF1Team.redBullLogoURL).into(mBinding.teamIcon)
-                "mercedes" -> Glide.with(context).load(mF1Team.mercedesLogoURL).into(mBinding.teamIcon)
-                "ferrari" -> Glide.with(context).load(mF1Team.ferrariLogoURL).into(mBinding.teamIcon)
-                "alphatauri" -> Glide.with(context).load(mF1Team.alphaTauriLogoURL).into(mBinding.teamIcon)
-                "alfa" -> Glide.with(context).load(mF1Team.alfaLogoURL).into(mBinding.teamIcon)
-                "williams" -> Glide.with(context).load(mF1Team.williamsLogoURL).into(mBinding.teamIcon)
-                "aston_martin" -> Glide.with(context).load(mF1Team.astonMartinLogoURL).into(mBinding.teamIcon)
-                "haas" -> Glide.with(context).load(mF1Team.haasLogoURL).into(mBinding.teamIcon)
-                "mclaren" -> Glide.with(context).load(mF1Team.mcLarenLogoURL).into(mBinding.teamIcon)
-                "alpine" -> Glide.with(context).load(mF1Team.alphineLogoURL).into(mBinding.teamIcon)
+                "red_bull" -> {
+                    Glide.with(context).load(mF1Car.redBullCarURL).into(mBinding.carImageView)
+                    Glide.with(context).load(mF1Team.redBullLogoURL).into(mBinding.teamIcon)
+                }
+                "mercedes" ->{
+                    Glide.with(context).load(mF1Team.mercedesLogoURL).into(mBinding.teamIcon)
+                    Glide.with(context).load(mF1Car.mercedesCarURL).into(mBinding.carImageView)
+
+                }
+                "ferrari" -> {
+                    Glide.with(context).load(mF1Team.ferrariLogoURL).into(mBinding.teamIcon)
+                    Glide.with(context).load(mF1Car.ferrariCarURL).into(mBinding.carImageView)
+
+                }
+                "alphatauri" ->{
+                    Glide.with(context).load(mF1Team.alphaTauriLogoURL).into(mBinding.teamIcon)
+                    Glide.with(context).load(mF1Car.alphaTauriCarURL).into(mBinding.carImageView)
+
+                }
+                "alfa" ->{
+                    Glide.with(context).load(mF1Team.alfaLogoURL).into(mBinding.teamIcon)
+                    Glide.with(context).load(mF1Car.alfaRomeoCarURL).into(mBinding.carImageView)
+
+                }
+                "williams" ->{
+                    Glide.with(context).load(mF1Team.williamsLogoURL).into(mBinding.teamIcon)
+                    Glide.with(context).load(mF1Car.williamsCarURL).into(mBinding.carImageView)
+
+                }
+                "aston_martin" ->{
+                    Glide.with(context).load(mF1Team.astonMartinLogoURL).into(mBinding.teamIcon)
+                    Glide.with(context).load(mF1Car.astonMartinCarURL).into(mBinding.carImageView)
+
+                }
+                "haas" ->{
+                    Glide.with(context).load(mF1Team.haasLogoURL).into(mBinding.teamIcon)
+                    Glide.with(context).load(mF1Car.haasCarURL).into(mBinding.carImageView)
+
+                }
+                "mclaren" ->{
+                    Glide.with(context).load(mF1Team.mcLarenLogoURL).into(mBinding.teamIcon)
+                    Glide.with(context).load(mF1Car.mcLarenCarURL).into(mBinding.carImageView)
+
+                }
+                "alpine" ->{
+                    Glide.with(context).load(mF1Team.alphineLogoURL).into(mBinding.teamIcon)
+                    Glide.with(context).load(mF1Car.alpineCarURL).into(mBinding.carImageView)
+
+                }
             }
 
             when(result[position].driverId){
-                "max_verstappen" -> Glide.with(context).load(mF1Driver.maxURL).into(mBinding.pilotNumber)
-                "perez" -> Glide.with(context).load(mF1Driver.sergioURL).into(mBinding.pilotNumber)
-                "russell" -> Glide.with(context).load(mF1Driver.georgeURL).into(mBinding.pilotNumber)
-                "hamilton" -> Glide.with(context).load(mF1Driver.lewisURL).into(mBinding.pilotNumber)
-                "gasly" -> Glide.with(context).load(mF1Driver.pierreURL).into(mBinding.pilotNumber)
-                "vettel" -> Glide.with(context).load(mF1Driver.vettelURL).into(mBinding.pilotNumber)
-                "alonso" -> Glide.with(context).load(mF1Driver.alonsoURL).into(mBinding.pilotNumber)
-                "ricciardo" -> Glide.with(context).load(mF1Driver.danielURL).into(mBinding.pilotNumber)
-                "norris" -> Glide.with(context).load(mF1Driver.norrisURL).into(mBinding.pilotNumber)
-                "ocon" -> Glide.with(context).load(mF1Driver.oconURL).into(mBinding.pilotNumber)
-                "bottas" -> Glide.with(context).load(mF1Driver.bottasURL).into(mBinding.pilotNumber)
-                "albon" -> Glide.with(context).load(mF1Driver.alexAlbonURL).into(mBinding.pilotNumber)
-                "tsunoda" -> Glide.with(context).load(mF1Driver.yukiURL).into(mBinding.pilotNumber)
-                "mick_schumacher" -> Glide.with(context).load(mF1Driver.mickURL).into(mBinding.pilotNumber)
-                "latifi" -> Glide.with(context).load(mF1Driver.goat).into(mBinding.pilotNumber)
-                "stroll" -> Glide.with(context).load(mF1Driver.lanceURL).into(mBinding.pilotNumber)
-                "kevin_magnussen" -> Glide.with(context).load(mF1Driver.magnussenURL).into(mBinding.pilotNumber)
-                "zhou"->Glide.with(context).load(mF1Driver.zhouURL).into(mBinding.pilotNumber)
-                "leclerc" -> Glide.with(context).load(mF1Driver.charlesURL).into(mBinding.pilotNumber)
-                "sainz" -> Glide.with(context).load(mF1Driver.sainzURL).into(mBinding.pilotNumber)
+                "max_verstappen" -> Glide.with(context).load(mF1Driver.maxVerstappen).into(mBinding.pilotImageView)
+                "perez" -> Glide.with(context).load(mF1Driver.sergioPerez).into(mBinding.pilotImageView)
+                "russell" -> Glide.with(context).load(mF1Driver.georgeRussell).into(mBinding.pilotImageView)
+                "hamilton" -> Glide.with(context).load(mF1Driver.lewisHamilton).into(mBinding.pilotImageView)
+                "gasly" -> Glide.with(context).load(mF1Driver.pierreGasly).into(mBinding.pilotImageView)
+                "vettel" -> Glide.with(context).load(mF1Driver.sebastianVettel).into(mBinding.pilotImageView)
+                "alonso" -> Glide.with(context).load(mF1Driver.fernandoAlanso).into(mBinding.pilotImageView)
+                "ricciardo" -> Glide.with(context).load(mF1Driver.danielRiccardo).into(mBinding.pilotImageView)
+                "norris" -> Glide.with(context).load(mF1Driver.landoNorris).into(mBinding.pilotImageView)
+                "ocon" -> Glide.with(context).load(mF1Driver.estebanOcon).into(mBinding.pilotImageView)
+                "bottas" -> Glide.with(context).load(mF1Driver.valtteriBottas).into(mBinding.pilotImageView)
+                "albon" -> Glide.with(context).load(mF1Driver.alexAlbon).into(mBinding.pilotImageView)
+                "tsunoda" -> Glide.with(context).load(mF1Driver.yukiTsunoda).into(mBinding.pilotImageView)
+                "mick_schumacher" -> Glide.with(context).load(mF1Driver.mickSchumacher).into(mBinding.pilotImageView)
+                "latifi" -> Glide.with(context).load(mF1Driver.goat).into(mBinding.pilotImageView)
+                "stroll" -> Glide.with(context).load(mF1Driver.lanceStroll).into(mBinding.pilotImageView)
+                "kevin_magnussen" -> Glide.with(context).load(mF1Driver.kevinMagnussen).into(mBinding.pilotImageView)
+                "zhou"->Glide.with(context).load(mF1Driver.zhou).into(mBinding.pilotImageView)
+                "leclerc" -> Glide.with(context).load(mF1Driver.charlesLeclerc).into(mBinding.pilotImageView)
+                "sainz" -> Glide.with(context).load(mF1Driver.carlosSainz).into(mBinding.pilotImageView)
             }
         }
 

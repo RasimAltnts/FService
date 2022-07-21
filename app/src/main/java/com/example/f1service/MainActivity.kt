@@ -28,10 +28,11 @@ class MainActivity : AppCompatActivity() {
         mFragmentStateManager = FragmentStateManager()
         mFragmentStateManager.setFragmentManager(mFragmentManager)
 
-        //--Test
-        mFragmentStateManager.goSprintPage()
+        Const.nextTime.observe(this) {
+            setHomePage()
+        }
 
-
+        
         val mHomeNavigationBar: View = mBinding.bottomNavigationBar.findViewById(R.id.home)
         mHomeNavigationBar.performClick()
 
@@ -43,39 +44,7 @@ class MainActivity : AppCompatActivity() {
                         true
                     }
                     R.id.home -> {
-                        if (Const.raceTime != null
-                            && Const.qualifityTime != null
-                            && Const.currentTime != null) {
-
-                            if (Const.sprintTime != null) {
-
-                                if (Const.currentTime!! > Const.raceTime) {
-                                    mFragmentStateManager.goRacePage(Const.session,Const.round)
-                                }
-
-                                else if (Const.currentTime!! > Const.sprintTime) {
-                                    mFragmentStateManager.goSprintPage()
-                                }
-
-                                else if (Const.currentTime!! > Const.qualifityTime) {
-                                    mFragmentStateManager.goQualiftyPage(Const.session,Const.round)
-                                }
-
-                            }
-                            else {
-                                if (Const.currentTime!! > Const.raceTime) {
-                                    mFragmentStateManager.goRacePage(Const.session,Const.round)
-                                }
-
-                                else if (Const.currentTime!! > Const.qualifityTime) {
-                                    mFragmentStateManager.goQualiftyPage(Const.session,Const.round)
-                                }
-                                else {
-                                    mFragmentStateManager.goRacePage(Const.session,(Const.round.toInt()-1).toString())
-                                }
-                            }
-
-                        }
+                        setHomePage()
                         true
                     }
                     R.id.driver -> {
@@ -91,5 +60,43 @@ class MainActivity : AppCompatActivity() {
             }
         mBinding.bottomNavigationBar.setOnItemSelectedListener(bottomNavigationBar)
         mFragmentStateManager.goNextRace()
+    }
+
+
+    private fun setHomePage() {
+        if (Const.nextTime.value?.raceTime != null
+            && Const.nextTime.value?.qualitime != null
+            && Const.currentTime != null) {
+
+            if (Const.nextTime.value?.sprintTime != null) {
+
+                if (Const.currentTime!! > Const.nextTime.value?.raceTime) {
+                    mFragmentStateManager.goRacePage(Const.nextTime.value?.session,Const.nextTime.value?.round)
+                }
+
+                else if (Const.currentTime!! > Const.nextTime.value?.sprintTime) {
+                    mFragmentStateManager.goSprintPage()
+                }
+
+                else if (Const.currentTime!! > Const.nextTime.value?.qualitime) {
+                    mFragmentStateManager.goQualiftyPage(Const.nextTime.value?.session,Const.nextTime.value?.round)
+                }
+
+            }
+            else {
+                if (Const.currentTime!! > Const.nextTime.value?.raceTime) {
+                    mFragmentStateManager.goRacePage(Const.nextTime.value?.session,Const.nextTime.value?.round)
+                }
+
+                else if (Const.currentTime!! > Const.nextTime.value?.qualitime) {
+                    mFragmentStateManager.goQualiftyPage(Const.nextTime.value?.session,Const.nextTime.value?.round)
+                }
+                else {
+                    mFragmentStateManager.goRacePage(Const.nextTime.value?.session,(Const.nextTime.value?.round?.toInt()?.minus(1)).toString())
+                }
+            }
+
+        }
+
     }
 }

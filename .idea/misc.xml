@@ -13,8 +13,9 @@
         <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/f1_next_race_fragment.xml" value="0.29322916666666665" />
         <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/f1_qualifity_fragment.xml" value="0.1675925925925926" />
         <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/f1_sprint_fragment.xml" value="0.1390625" />
+        <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/last_race_row_holder.xml" value="0.22" />
         <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/qualify_row_holder.xml" value="0.1675925925925926" />
-        <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/sprint_result_row_holder.xml" value="0.1675925925925926" />
+        <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/sprint_result_row_holder.xml" value="0.25" />
       </map>
     </option>
   </component>

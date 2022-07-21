@@ -49,14 +49,14 @@
                 android:textSize="50px"/>
 
             <ImageView
-                android:id="@+id/teamIcon"
+                android:id="@+id/pilotImageView"
                 android:layout_width="90px"
                 android:layout_height="80px"
                 android:layout_marginLeft="180px"
                 android:layout_marginTop="10px"/>
 
             <ImageView
-                android:id="@+id/pilotNumber"
+                android:id="@+id/teamIcon"
                 android:layout_width="80px"
                 android:layout_height="80px"
                 android:layout_marginLeft="180px"
@@ -82,7 +82,15 @@
                 android:gravity="center"
                 android:fontFamily="@font/kumbhsans_light"
                 android:layout_marginLeft="800px"
-                android:layout_marginTop="70px"/>
+                android:layout_marginTop="20px"/>
+
+            <ImageView
+                android:id="@+id/carImageView"
+                android:layout_marginLeft="748px"
+                android:layout_marginTop="92px"
+                android:layout_width="240px"
+                android:layout_height="100px"
+                android:backgroundTintMode="multiply"/>
 
         </com.google.android.material.card.MaterialCardView>
 

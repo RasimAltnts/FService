@@ -8,11 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.f1service.F1.F1Cars
 import com.example.f1service.F1.F1Driver
-import com.example.f1service.F1.F1DriverNumber
 import com.example.f1service.F1.F1Team
 import com.example.f1service.databinding.SprintResultRowHolderBinding
 import com.example.f1service.model.DF1SprintDriverModels
-import com.example.f1service.view.F1Drivers
 
 class SprintAdapter(val list:ArrayList<DF1SprintDriverModels>,val context:Context):RecyclerView.Adapter<SprintAdapter.RowHolder> () {
 

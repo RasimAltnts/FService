@@ -2,6 +2,7 @@ package com.example.f1service.view
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.f1service.adapter.LastRaceAdapter
 import com.example.f1service.databinding.HomepageFragmentBinding
 import com.example.f1service.fragmentStateManager.FragmentStateManager
+import com.example.f1service.service.IRequestCallback
+import com.example.f1service.service.RestService
+import com.google.gson.JsonObject
 import java.lang.Exception
 
 class Homepage : Fragment() {
@@ -50,23 +54,43 @@ class Homepage : Fragment() {
             else {
                 mBinding.lastRaceTextView.text = it.circuitName
 
-                it.pilot?.let {
-                    val adapter: LastRaceAdapter
-                    val layout: RecyclerView.LayoutManager =
-                        LinearLayoutManager(requireContext())
-                    mBinding.lastRaceRecycleView.layoutManager = layout
-                    adapter = LastRaceAdapter(it,requireContext())
-                    mBinding.lastRaceRecycleView.adapter = adapter
+                try {
+                    it.pilot?.let {
+                        val adapter: LastRaceAdapter
+                        val layout: RecyclerView.LayoutManager =
+                            LinearLayoutManager(requireContext())
+                        mBinding.lastRaceRecycleView.layoutManager = layout
+                        adapter = LastRaceAdapter(it,requireContext())
+                        mBinding.lastRaceRecycleView.adapter = adapter
+                    }
+
+                }catch (e:Exception) {
+                    Log.d("I/List","RecycleView Error :${e.cause}")
                 }
             }
         }
 
         try {
-            viewModel.getLastRace(session,round)
+            getLastRace(session,round)
         }catch (e:Exception) {
             println(e.localizedMessage)
         }
 
+    }
+
+    private var mRestService = RestService()
+
+
+    private var lastRaceResultCallback: IRequestCallback = object : IRequestCallback {
+        override fun isSuccesfull(response: JsonObject?) {
+            response?.let {
+                viewModel.decodeLastRaceResponse(response)
+            }
+        }
+    }
+
+    fun getLastRace(session:String,round:String) {
+        mRestService.sendRequest("$session/$round/results.json",lastRaceResultCallback)
     }
 
 }

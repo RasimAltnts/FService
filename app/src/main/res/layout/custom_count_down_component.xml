@@ -27,7 +27,7 @@
         style="@style/countDownTimerStyle"
         android:layout_width="match_parent"
         android:gravity="center"
-        android:textSize="40px"
+        android:textSize="48px"
         android:layout_height="50px"
         android:layout_marginTop="10px"
         app:layout_constraintEnd_toEndOf="parent"

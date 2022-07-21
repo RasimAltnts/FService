@@ -1,5 +1,6 @@
 package com.example.f1service.view
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.f1service.R
 import com.example.f1service.adapter.QualifyAdapter
 import com.example.f1service.databinding.F1QualifityFragmentBinding
+import com.example.f1service.service.IRequestCallback
+import com.example.f1service.service.RestService
+import com.google.gson.JsonObject
 
 class F1Qualifity : Fragment() {
 
@@ -18,6 +22,7 @@ class F1Qualifity : Fragment() {
     private lateinit var mBinding:F1QualifityFragmentBinding
     private lateinit var session:String
     private lateinit var round:String
+    private var mRestService = RestService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +47,7 @@ class F1Qualifity : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(F1QualifityViewModel::class.java)
-        viewModel.getQualifying(session,round)
+        getQualifying(session,round)
 
         viewModel.qualifity.observe(viewLifecycleOwner) {
 
@@ -55,5 +60,18 @@ class F1Qualifity : Fragment() {
             adapter = QualifyAdapter(it.driverInfo,requireContext())
             mBinding.QualiftyRecycleView.adapter = adapter
         }
+    }
+
+    private var qualifyingCallback = object : IRequestCallback {
+        @SuppressLint("CutPasteId", "SetTextI18n")
+        override fun isSuccesfull(response: JsonObject?) {
+            response?.let {
+                viewModel.decodeResponse(response)
+            }
+        }
+    }
+
+    fun getQualifying(session:String,round:String) {
+        mRestService.sendRequest("$session/$round/qualifying.json",qualifyingCallback)
     }
 }
