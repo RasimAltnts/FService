@@ -22,9 +22,9 @@
 
         <ImageView
             android:id="@+id/finishFlag"
-            android:layout_width="80px"
+            android:layout_width="120px"
             android:layout_height="80px"
-            android:layout_marginLeft="60px"
+            android:layout_marginLeft="40px"
             android:layout_marginTop="20px"
             android:scaleType="centerCrop"
             android:src="@drawable/race_flag"

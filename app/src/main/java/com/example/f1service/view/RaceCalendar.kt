@@ -51,7 +51,7 @@ class RaceCalendar : Fragment(),RaceListAdapter.IRaceList {
             val layout: RecyclerView.LayoutManager =
                 LinearLayoutManager(requireContext())
             mBinding.racelistRecycleView.layoutManager = layout
-            adapter = RaceListAdapter(it.session,this)
+            adapter = RaceListAdapter(it.session,this,requireContext())
             mBinding.racelistRecycleView.adapter = adapter
         }
     }

@@ -53,10 +53,37 @@ class CountDownTimer() {
         val seconds = remainderMinutes / secondsMilliseconds
 
         withContext(Main) {
-            listener.getDays(days)
-            listener.getHours(hours)
-            listener.getMinutes(minutes)
-            listener.getSeconds(seconds)
+            if (days <= 0) {
+                listener.getDays(0)
+            }
+            else{
+                listener.getDays(days)
+            }
+
+            if (hours <= 0) {
+                listener.getHours(0)
+
+            }
+
+            else {
+                listener.getHours(hours)
+            }
+
+            if (minutes <= 0) {
+                listener.getMinutes(0)
+            }
+
+            else {
+                listener.getMinutes(minutes)
+
+            }
+            if (seconds <= 0) {
+                listener.getSeconds(0)
+            }
+            else {
+                listener.getSeconds(seconds)
+            }
+
         }
     }
 
@@ -66,5 +93,13 @@ class CountDownTimer() {
 
     fun stopTimer(){
         stopTimer = true
+    }
+
+
+    fun checkDate(date: Date):Boolean {
+        val currentTime = Calendar.getInstance().time
+        var result:Boolean = false
+        result = currentTime.time > date.time
+        return result
     }
 }

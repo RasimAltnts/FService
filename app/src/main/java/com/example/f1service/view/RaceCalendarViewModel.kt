@@ -21,8 +21,7 @@ class RaceCalendarViewModel : ViewModel() {
         val result= DF1CurrentSession(
             circuitName = currentSessionModels.mRData.raceTable.races[0].circuit.circuitName,
             circuitId = currentSessionModels.mRData.raceTable.races[0].circuit.circuitId,
-            location = currentSessionModels.mRData.raceTable.races[0].circuit.location,
-            session = sessionList(currentSessionModels.mRData.raceTable.races)
+            session = sessionList(currentSessionModels.mRData.raceTable.races),
         )
 
         calendar.value = result
@@ -39,7 +38,8 @@ class RaceCalendarViewModel : ViewModel() {
                 time = list[i].time,
                 session = list[i].season,
                 round = list[i].round,
-                racename = list[i].raceName
+                racename = list[i].raceName,
+                location = list[i].circuit.location
             )
             result.add(res)
             i++
