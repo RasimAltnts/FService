@@ -7,6 +7,7 @@ import com.example.f1service.model.DF1SprintModels
 import com.example.f1service.model.F1SprintModel.F1SprintModels
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import java.lang.Exception
 
 class F1SprintViewModel : ViewModel() {
     val sprintLiveData: MutableLiveData<DF1SprintModels> by lazy {
@@ -18,12 +19,15 @@ class F1SprintViewModel : ViewModel() {
     fun decodeResponse(jsonObject:JsonObject) {
         val mF1SprintModel = gson.fromJson(jsonObject, F1SprintModels::class.java)
 
-        sprintLiveData.value = DF1SprintModels(
-            circiutName = mF1SprintModel.mRData.raceTable.races[0].circuit.circuitName,
-            circiutId = mF1SprintModel.mRData.raceTable.races[0].circuit.circuitId,
-            sprintDriver = decodeDriverList(mF1SprintModel)
-
-        )
+        try {
+            sprintLiveData.value = DF1SprintModels(
+                circiutName = mF1SprintModel.mRData.raceTable.races[0].circuit.circuitName,
+                circiutId = mF1SprintModel.mRData.raceTable.races[0].circuit.circuitId,
+                sprintDriver = decodeDriverList(mF1SprintModel))
+        }catch (e:Exception) {
+            println(e.localizedMessage)
+            sprintLiveData.value = null
+        }
     }
 
     private fun decodeDriverList(res : F1SprintModels):ArrayList<DF1SprintDriverModels> {

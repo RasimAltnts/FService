@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.f1service.R
 import com.example.f1service.adapter.QualifyAdapter
 import com.example.f1service.databinding.F1QualifityFragmentBinding
+import com.example.f1service.extension.Const
+import com.example.f1service.fragmentStateManager.FragmentStateManager
+import com.example.f1service.model.DF1Qualifying
 import com.example.f1service.service.IRequestCallback
 import com.example.f1service.service.RestService
 import com.google.gson.JsonObject
@@ -20,6 +23,7 @@ class F1Qualifity : Fragment() {
 
     private lateinit var viewModel: F1QualifityViewModel
     private lateinit var mBinding:F1QualifityFragmentBinding
+    private var mFragmentStateManager = FragmentStateManager.getInstance()
     private lateinit var session:String
     private lateinit var round:String
     private var mRestService = RestService()
@@ -50,15 +54,13 @@ class F1Qualifity : Fragment() {
         getQualifying(session,round)
 
         viewModel.qualifity.observe(viewLifecycleOwner) {
-
-            mBinding.raceTextView.text = it.circuitName
-
-            val adapter:QualifyAdapter
-            val layout: RecyclerView.LayoutManager =
-                LinearLayoutManager(requireContext())
-            mBinding.QualiftyRecycleView.layoutManager = layout
-            adapter = QualifyAdapter(it.driverInfo,requireContext())
-            mBinding.QualiftyRecycleView.adapter = adapter
+            if (it != null) {
+                initQualifyLayout(it)
+            }
+            else {
+                mFragmentStateManager.goRacePage(Const.nextTime.value?.session,
+                    (Const.nextTime.value?.round?.toInt()?.minus(1)).toString())
+            }
         }
     }
 
@@ -73,5 +75,16 @@ class F1Qualifity : Fragment() {
 
     fun getQualifying(session:String,round:String) {
         mRestService.sendRequest("$session/$round/qualifying.json",qualifyingCallback)
+    }
+
+    fun initQualifyLayout(data:DF1Qualifying?) {
+        mBinding.raceTextView.text = data?.circuitName
+
+        val adapter:QualifyAdapter
+        val layout: RecyclerView.LayoutManager =
+            LinearLayoutManager(requireContext())
+        mBinding.QualiftyRecycleView.layoutManager = layout
+        adapter = QualifyAdapter(data!!.driverInfo,requireContext())
+        mBinding.QualiftyRecycleView.adapter = adapter
     }
 }

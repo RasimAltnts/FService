@@ -41,7 +41,7 @@ class RaceCalendar : Fragment(),RaceListAdapter.IRaceList {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(RaceCalendarViewModel::class.java)
-        mFragmentStateManager = FragmentStateManager()
+        mFragmentStateManager = FragmentStateManager.getInstance()
 
         sendRequest()
 

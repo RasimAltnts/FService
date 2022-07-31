@@ -60,8 +60,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="250px"
-            android:layout_marginLeft="50px"
-            android:layout_marginRight="50px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
             android:layout_marginTop="125px"
             android:background="@drawable/last_race_count_down_bg">
 
@@ -102,10 +102,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/CountDownLayout"
+            android:background="@drawable/countdown_layout_bg"
+            android:alpha="0.5"
             android:layout_width="500px"
             android:layout_marginTop="150px"
             android:layout_height="190px"
-            android:layout_marginLeft="90px">
+            android:layout_marginLeft="40px">
 
             <com.example.f1service.customComponents.CalendarComponents
                 android:id="@+id/CalendarComponetsDays"

@@ -5,17 +5,24 @@
       <map>
         <entry key="..\:/Users/90552/AndroidStudioProjects/F1Service/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.191" />
         <entry key="..\:/Users/90552/AndroidStudioProjects/F1Service/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/drawable-v24/ic_launcher_fg.xml" value="0.206" />
         <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.149" />
+        <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/drawable/countdown_layout_bg.xml" value="0.2375" />
         <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/drawable/ic_launcher_background.xml" value="0.149" />
         <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/activity_main.xml" value="0.29322916666666665" />
         <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/cons_row_holder.xml" value="0.1675925925925926" />
         <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/custom_count_down_component.xml" value="0.1675925925925926" />
-        <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/f1_next_race_fragment.xml" value="0.29322916666666665" />
+        <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/f1_constructor_standing_fragment.xml" value="0.16458333333333333" />
+        <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/f1_drivers_fragment.xml" value="0.18" />
+        <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/f1_next_race_fragment.xml" value="0.15568862275449102" />
         <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/f1_qualifity_fragment.xml" value="0.1675925925925926" />
         <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/f1_sprint_fragment.xml" value="0.1390625" />
+        <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/homepage_fragment.xml" value="0.16614583333333333" />
         <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/last_race_row_holder.xml" value="0.22" />
         <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/qualify_row_holder.xml" value="0.1675925925925926" />
+        <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/race_calendar_fragment.xml" value="0.33" />
         <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/layout/sprint_result_row_holder.xml" value="0.25" />
+        <entry key="..\:/Users/90552/AndroidStudioProjects/FService/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.239" />
       </map>
     </option>
   </component>

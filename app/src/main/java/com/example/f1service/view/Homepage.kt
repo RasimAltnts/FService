@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.f1service.adapter.LastRaceAdapter
 import com.example.f1service.databinding.HomepageFragmentBinding
+import com.example.f1service.extension.Const
 import com.example.f1service.fragmentStateManager.FragmentStateManager
+import com.example.f1service.model.DLastRace
 import com.example.f1service.service.IRequestCallback
 import com.example.f1service.service.RestService
 import com.google.gson.JsonObject
@@ -46,35 +48,24 @@ class Homepage : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomepageViewModel::class.java)
-        mFragmentStateManager = FragmentStateManager()
+        mFragmentStateManager = FragmentStateManager.getInstance()
+
         viewModel.lastRaceInfo.observe(requireActivity()) {
-            if (it.pilot == null) {
-                mFragmentStateManager.goQualiftyPage(session,round)
+            if (it != null) {
+                initLastRaceLayout(it)
             }
             else {
-                mBinding.lastRaceTextView.text = it.circuitName
-
-                try {
-                    it.pilot?.let {
-                        val adapter: LastRaceAdapter
-                        val layout: RecyclerView.LayoutManager =
-                            LinearLayoutManager(requireContext())
-                        mBinding.lastRaceRecycleView.layoutManager = layout
-                        adapter = LastRaceAdapter(it,requireContext())
-                        mBinding.lastRaceRecycleView.adapter = adapter
-                    }
-
-                }catch (e:Exception) {
-                    Log.d("I/List","RecycleView Error :${e.cause}")
+                if (Const.nextTime.value?.sprintTime != null) {
+                    mFragmentStateManager.goSprintPage()
+                }
+                else {
+                    mFragmentStateManager.goQualiftyPage(Const.nextTime.value?.session,
+                        Const.nextTime.value?.round)
                 }
             }
         }
 
-        try {
-            getLastRace(session,round)
-        }catch (e:Exception) {
-            println(e.localizedMessage)
-        }
+        getLastRace(session,round)
 
     }
 
@@ -91,6 +82,23 @@ class Homepage : Fragment() {
 
     fun getLastRace(session:String,round:String) {
         mRestService.sendRequest("$session/$round/results.json",lastRaceResultCallback)
+    }
+
+    fun initLastRaceLayout(data:DLastRace) {
+        mBinding.lastRaceTextView.text = data.circuitName.toString()
+        try {
+            data.pilot?.let {
+                val adapter: LastRaceAdapter
+                val layout: RecyclerView.LayoutManager =
+                    LinearLayoutManager(requireContext())
+                mBinding.lastRaceRecycleView.layoutManager = layout
+                adapter = LastRaceAdapter(it,requireContext())
+                mBinding.lastRaceRecycleView.adapter = adapter
+            }
+
+        }catch (e:Exception) {
+            Log.d("I/List","RecycleView Error :${e.cause}")
+        }
     }
 
 }

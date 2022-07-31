@@ -8,6 +8,7 @@ import com.example.f1service.model.F1QulifityRes.F1Qualifying
 import com.example.f1service.model.F1QulifityRes.QualifyingResult
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import java.lang.Exception
 
 class F1QualifityViewModel : ViewModel() {
 
@@ -18,16 +19,22 @@ class F1QualifityViewModel : ViewModel() {
 
     private var gson = Gson()
 
-    fun decodeResponse(jsonObject: JsonObject):DF1Qualifying {
+    fun decodeResponse(jsonObject: JsonObject) {
         val mF1Qualifity = gson.fromJson(jsonObject, F1Qualifying::class.java)
+        var result:DF1Qualifying ?= null
 
-        val result:DF1Qualifying = DF1Qualifying(
-            circuitName = mF1Qualifity.mRData.raceTable.races[0].circuit.circuitName,
-            circuitId = mF1Qualifity.mRData.raceTable.races[0].circuit.circuitId,
-            driverInfo = driverInfo(mF1Qualifity.mRData.raceTable.races[0].qualifyingResults)
-        )
+        try {
+            result = DF1Qualifying(
+                circuitName = mF1Qualifity.mRData.raceTable.races[0].circuit.circuitName,
+                circuitId = mF1Qualifity.mRData.raceTable.races[0].circuit.circuitId,
+                driverInfo = driverInfo(mF1Qualifity.mRData.raceTable.races[0].qualifyingResults)
+            )
 
-        return result
+        }catch (e:Exception) {
+            println(e.localizedMessage)
+        }
+
+        qualifity.value = result
     }
 
     private fun checkTime(time:String):String? {

@@ -8,6 +8,7 @@ import com.example.f1service.databinding.ActivityMainBinding
 import com.example.f1service.extension.Const
 import com.example.f1service.fragmentStateManager.FragmentStateManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mFragmentStateManager:FragmentStateManager
-
+    private var mCurrentTime = Calendar.getInstance()
 
 
     @SuppressLint("SetTextI18n")
@@ -24,9 +25,10 @@ class MainActivity : AppCompatActivity() {
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
+
         val mFragmentManager = supportFragmentManager
-        mFragmentStateManager = FragmentStateManager()
-        mFragmentStateManager.setFragmentManager(mFragmentManager)
+        mFragmentStateManager = FragmentStateManager.getInstance()
+        mFragmentStateManager.init(mFragmentManager)
 
         Const.nextTime.observe(this) {
             setHomePage()
@@ -60,43 +62,50 @@ class MainActivity : AppCompatActivity() {
             }
         mBinding.bottomNavigationBar.setOnItemSelectedListener(bottomNavigationBar)
         mFragmentStateManager.goNextRace()
+
     }
 
 
     private fun setHomePage() {
         if (Const.nextTime.value?.raceTime != null
-            && Const.nextTime.value?.qualitime != null
-            && Const.currentTime != null) {
-
+            && Const.nextTime.value?.qualitime != null) {
             if (Const.nextTime.value?.sprintTime != null) {
-
-                if (Const.currentTime!! > Const.nextTime.value?.raceTime) {
-                    mFragmentStateManager.goRacePage(Const.nextTime.value?.session,Const.nextTime.value?.round)
-                }
-
-                else if (Const.currentTime!! > Const.nextTime.value?.sprintTime) {
-                    mFragmentStateManager.goSprintPage()
-                }
-
-                else if (Const.currentTime!! > Const.nextTime.value?.qualitime) {
-                    mFragmentStateManager.goQualiftyPage(Const.nextTime.value?.session,Const.nextTime.value?.round)
-                }
-
+                haveSprintRace()
             }
             else {
-                if (Const.currentTime!! > Const.nextTime.value?.raceTime) {
-                    mFragmentStateManager.goRacePage(Const.nextTime.value?.session,Const.nextTime.value?.round)
-                }
-
-                else if (Const.currentTime!! > Const.nextTime.value?.qualitime) {
-                    mFragmentStateManager.goQualiftyPage(Const.nextTime.value?.session,Const.nextTime.value?.round)
-                }
-                else {
-                    mFragmentStateManager.goRacePage(Const.nextTime.value?.session,(Const.nextTime.value?.round?.toInt()?.minus(1)).toString())
-                }
+                noSprintRace()
             }
 
         }
 
+    }
+
+    private fun haveSprintRace() {
+
+        if (mCurrentTime.time > Const.nextTime.value?.raceTime) {
+            mFragmentStateManager.goRacePage(Const.nextTime.value?.session,Const.nextTime.value?.round)
+        }
+
+        else if (mCurrentTime.time > Const.nextTime.value?.sprintTime) {
+            mFragmentStateManager.goSprintPage()
+        }
+
+        else if (mCurrentTime.time > Const.nextTime.value?.qualitime) {
+            mFragmentStateManager.goQualiftyPage(Const.nextTime.value?.session,Const.nextTime.value?.round)
+        }
+    }
+
+
+    private fun noSprintRace(){
+        if (mCurrentTime.time > Const.nextTime.value?.raceTime) {
+            mFragmentStateManager.goRacePage(Const.nextTime.value?.session,Const.nextTime.value?.round)
+        }
+
+        else if (mCurrentTime.time > Const.nextTime.value?.qualitime) {
+            mFragmentStateManager.goQualiftyPage(Const.nextTime.value?.session,Const.nextTime.value?.round)
+        }
+        else {
+            mFragmentStateManager.goRacePage(Const.nextTime.value?.session,(Const.nextTime.value?.round?.toInt()?.minus(1)).toString())
+        }
     }
 }

@@ -20,17 +20,20 @@ class HomepageViewModel : ViewModel() {
 
 
     fun decodeLastRaceResponse(jsonObject: JsonObject) {
-        val mDLastRaceResult = gson.fromJson(jsonObject, F1LastRace::class.java)
+        try {
+            val mDLastRaceResult = gson.fromJson(jsonObject, F1LastRace::class.java)
+            val lastRace = DLastRace(
+                circuitName = mDLastRaceResult.mRData.raceTable.races[0].circuit.circuitName,
+                circuitId = mDLastRaceResult.mRData.raceTable.races[0].circuit.circuitId,
+                pilot = decodeLastRaceResultResponse(mDLastRaceResult.mRData.raceTable.races[0])
+            )
 
-
-        val lastRace = DLastRace(
-            circuitName = mDLastRaceResult.mRData.raceTable.races[0].circuit.circuitName,
-            circuitId = mDLastRaceResult.mRData.raceTable.races[0].circuit.circuitId,
-            pilot = decodeLastRaceResultResponse(mDLastRaceResult.mRData.raceTable.races[0])
-        )
-
-        lastRace.let {
-            lastRaceInfo.value = lastRace
+            lastRace.let {
+                lastRaceInfo.value = lastRace
+            }
+        }catch (e:Exception) {
+            println("Error:${e.cause}")
+            lastRaceInfo.value = null
         }
     }
 

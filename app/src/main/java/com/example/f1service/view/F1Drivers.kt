@@ -35,6 +35,7 @@ class F1Drivers : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(F1DriversViewModel::class.java)
+
         getDriverList()
 
         viewModel.driverList.observe(viewLifecycleOwner) {
